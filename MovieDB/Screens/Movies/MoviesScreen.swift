@@ -5,7 +5,7 @@ struct MoviesScreen: View {
   
   var body: some View {
     ScrollView {
-      ForEach(viewModel.movies) { movie in
+      ForEach(viewModel.serials) { movie in
         HStack {
           Text(movie.name)
             .font(.largeTitle)

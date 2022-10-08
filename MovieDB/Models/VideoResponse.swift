@@ -1,10 +1,10 @@
 import Foundation
 
-struct MoviesResponse: Codable {
-  var docs: [Movie]
+struct VideoResponse: Codable {
+  var docs: [Video]
 }
 
-struct Movie: Identifiable, Codable {
+struct Video: Identifiable, Codable {
   let externalID: ExternalID
   let logo: Logo
   let poster: PosterResponse
@@ -13,10 +13,8 @@ struct Movie: Identifiable, Codable {
   let id: Int
   let names: [Name]
   let alternativeName: String
-//  let welcomeDescription, enName: JSONNull?
   let movieLength: Int?
   let name: String
-//  let shortDescription: JSONNull?
   let type: String
   let year: Int
   
@@ -39,11 +37,9 @@ struct ExternalID: Codable {
 
 struct Logo: Codable {
   let id: String
-//  let url: JSONNull?
   
   enum CodingKeys: String, CodingKey {
     case id = "_id"
-//    case url
   }
 }
 
@@ -70,7 +66,9 @@ struct PosterResponse: Codable {
 struct RatingResponse: Codable {
   let id: String
   let kp, imdb: Double
-  let filmCritics, russianFilmCritics, await: Int
+  let filmCritics: Int
+  let russianFilmCritics: Double
+  let await: Double
   
   enum CodingKeys: String, CodingKey {
     case id = "_id"
