@@ -1,10 +1,10 @@
 import Foundation
 
-struct MoviesResponse {
+struct MoviesResponse: Codable {
   var docs: [Movie]
 }
 
-struct Movie: Codable {
+struct Movie: Identifiable, Codable {
   let externalID: ExternalID
   let logo: Logo
   let poster: PosterResponse
@@ -13,24 +13,23 @@ struct Movie: Codable {
   let id: Int
   let names: [Name]
   let alternativeName: String
-  let welcomeDescription, enName: JSONNull?
-  let movieLength: Int
+//  let welcomeDescription, enName: JSONNull?
+  let movieLength: Int?
   let name: String
-  let shortDescription: JSONNull?
+//  let shortDescription: JSONNull?
   let type: String
   let year: Int
   
   enum CodingKeys: String, CodingKey {
     case externalID = "externalId"
     case logo, poster, rating, votes, id, names, alternativeName
-    case welcomeDescription = "description"
-    case enName, movieLength, name, shortDescription, type, year
+    case movieLength, name, type, year
   }
 }
 
 struct ExternalID: Codable {
   let id: String
-  let imdb: JSONNull?
+  let imdb: String?
   
   enum CodingKeys: String, CodingKey {
     case id = "_id"
@@ -40,11 +39,11 @@ struct ExternalID: Codable {
 
 struct Logo: Codable {
   let id: String
-  let url: JSONNull?
+//  let url: JSONNull?
   
   enum CodingKeys: String, CodingKey {
     case id = "_id"
-    case url
+//    case url
   }
 }
 
@@ -76,30 +75,5 @@ struct RatingResponse: Codable {
   enum CodingKeys: String, CodingKey {
     case id = "_id"
     case kp, imdb, filmCritics, russianFilmCritics, await
-  }
-}
-
-class JSONNull: Codable, Hashable {
-  
-  public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-    return true
-  }
-  
-  public var hashValue: Int {
-    return 0
-  }
-  
-  public init() {}
-  
-  public required init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    if !container.decodeNil() {
-      throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-    }
-  }
-  
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encodeNil()
   }
 }
