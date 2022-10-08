@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct SelectedMovieScreen: View {
+  let video: Video
+  
   var body: some View {
-    Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    Text(video.name)
   }
 }
