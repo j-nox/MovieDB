@@ -5,14 +5,18 @@ struct MoviesScreen: View {
   
   var body: some View {
     ScrollView {
-      ForEach(viewModel.serials) { movie in
-        HStack {
-          Text(movie.name)
-            .font(.largeTitle)
-          
-          Spacer()
+      ForEach(viewModel.movies) { movie in
+        NavigationLink {
+          SelectedMovieScreen(video: movie)
+        } label: {
+          HStack {
+            Text(movie.name)
+              .font(.largeTitle)
+            
+            Spacer()
+          }
+           .padding()
         }
-         .padding()
       }
     }
   }
