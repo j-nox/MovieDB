@@ -5,7 +5,7 @@ struct MoviesScreen: View {
   
   var body: some View {
     ScrollView {
-      ForEach(viewModel.movies) { movie in
+      ForEach(viewModel.se) { movie in
         NavigationLink {
           SelectedMovieScreen(video: movie)
         } label: {
