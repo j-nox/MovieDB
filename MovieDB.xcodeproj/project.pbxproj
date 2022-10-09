@@ -15,6 +15,9 @@
 		92CED90628EF1C9600A93381 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CED90528EF1C9600A93381 /* ContentView.swift */; };
 		92CED90828EF1C9900A93381 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CED90728EF1C9900A93381 /* Assets.xcassets */; };
 		92CED90B28EF1C9900A93381 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CED90A28EF1C9900A93381 /* Preview Assets.xcassets */; };
+		BF9B633B28F2C6DA003AAF20 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9B633A28F2C6DA003AAF20 /* Resource.swift */; };
+		BF9B633D28F2C820003AAF20 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9B633C28F2C820003AAF20 /* NetworkService.swift */; };
+		BF9B634028F2C86E003AAF20 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9B633F28F2C86E003AAF20 /* AppError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		92CED90528EF1C9600A93381 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		92CED90728EF1C9900A93381 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92CED90A28EF1C9900A93381 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BF9B633A28F2C6DA003AAF20 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		BF9B633C28F2C820003AAF20 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		BF9B633F28F2C86E003AAF20 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,9 +49,9 @@
 		9243FB4428F1B04C00E12DC0 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				9243FB4F28F1CC6500E12DC0 /* Selected movie */,
-				9243FB4E28F1CC5900E12DC0 /* Movies */,
 				92CED90528EF1C9600A93381 /* ContentView.swift */,
+				9243FB4E28F1CC5900E12DC0 /* Movies */,
+				9243FB4F28F1CC6500E12DC0 /* Selected movie */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -94,11 +100,12 @@
 		92CED90228EF1C9600A93381 /* MovieDB */ = {
 			isa = PBXGroup;
 			children = (
+				BF9B633E28F2C864003AAF20 /* Errors */,
 				9243FB4928F1B35B00E12DC0 /* Models */,
+				BF9B633728F2C5C9003AAF20 /* Resources */,
 				9243FB4428F1B04C00E12DC0 /* Screens */,
-				92CED90328EF1C9600A93381 /* MovieDBApp.swift */,
-				92CED90728EF1C9900A93381 /* Assets.xcassets */,
-				92CED90928EF1C9900A93381 /* Preview Content */,
+				BF9B633928F2C69B003AAF20 /* Services */,
+				BF9B633828F2C67B003AAF20 /* System */,
 			);
 			path = MovieDB;
 			sourceTree = "<group>";
@@ -109,6 +116,40 @@
 				92CED90A28EF1C9900A93381 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BF9B633728F2C5C9003AAF20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				92CED90928EF1C9900A93381 /* Preview Content */,
+				92CED90728EF1C9900A93381 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BF9B633828F2C67B003AAF20 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				92CED90328EF1C9600A93381 /* MovieDBApp.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		BF9B633928F2C69B003AAF20 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BF9B633A28F2C6DA003AAF20 /* Resource.swift */,
+				BF9B633C28F2C820003AAF20 /* NetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		BF9B633E28F2C864003AAF20 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				BF9B633F28F2C86E003AAF20 /* AppError.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,10 +224,13 @@
 			files = (
 				92CED90628EF1C9600A93381 /* ContentView.swift in Sources */,
 				9243FB4828F1B09B00E12DC0 /* SelectedMovieScreen.swift in Sources */,
+				BF9B633D28F2C820003AAF20 /* NetworkService.swift in Sources */,
 				92CED90428EF1C9600A93381 /* MovieDBApp.swift in Sources */,
 				9243FB5128F1CCD100E12DC0 /* MoviesViewModel.swift in Sources */,
 				9243FB4628F1B07000E12DC0 /* MoviesScreen.swift in Sources */,
 				9243FB4D28F1B84100E12DC0 /* VideoResponse.swift in Sources */,
+				BF9B633B28F2C6DA003AAF20 /* Resource.swift in Sources */,
+				BF9B634028F2C86E003AAF20 /* AppError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,9 +356,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MovieDB/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MovieDB/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -329,6 +375,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jnox.MovieDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -340,9 +387,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MovieDB/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MovieDB/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -357,6 +406,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jnox.MovieDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

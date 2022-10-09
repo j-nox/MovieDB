@@ -1,6 +1,7 @@
 import Foundation
 
 class MoviesViewModel: ObservableObject {
+
   @Published var movies: [Video]  = []
   @Published var serials: [Video] = []
   
@@ -10,87 +11,35 @@ class MoviesViewModel: ObservableObject {
   var baseURL: String = "https://api.kinopoisk.dev"
   
   init() {
-    requestMovies()
-    requestSerials()
-  }
-  
-  func requestMovies() {
     
-    guard let url = URL(string: "\(baseURL)/movie?field=rating.kp&search=\(rating)&field=year&search=\(year)&sortField=votes.kp&token=\(token)") else {
-      fatalError("Missing URL")
-    }
-    
-    let urlRequest = URLRequest(url: url)
-    
-    let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-      if let error = error {
-        print("Request error: ", error)
-        return
+    Task {
+      
+      guard let moviesURL = URL(string: "\(baseURL)/movie?field=rating.kp&search=\(rating)&field=year&search=\(year)&sortField=votes.kp&token=\(token)") else {
+        throw AppError.custom(errorDescription: "Wrong URL")
       }
       
-      guard let response = response as? HTTPURLResponse else { return }
-      
-      if response.statusCode == 200 {
-        
-        guard let data = data else { return }
-        
-        DispatchQueue.main.async {
-          
-          do {
-            let decodedMovies = try JSONDecoder().decode(VideoResponse.self, from: data)
-            
-            self.movies = decodedMovies.docs
-          } catch let error {
-            print("Error decoding: ", error)
-          }
-          
-        }
-      } else {
-        print("error")
-      }
-    }
-    
-    dataTask.resume()
-  }
-  
-  func requestSerials() {
-    
-    guard let url = URL(string: "\(baseURL)/movie?field=rating.kp&search=\(rating)&field=year&search=\(year)&field=typeNumber&search=2&sortField=year&sortType=1&sortField=votes.imdb&sortType=-1&token=\(token)") else {
-      fatalError("Missing URL")
-    }
-    
-    let urlRequest = URLRequest(url: url)
-    
-    let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-      if let error = error {
-        print("Request error: ", error)
-        return
+      guard let serialURL = URL(string: "\(baseURL)/movie?field=rating.kp&search=\(rating)&field=year&search=\(year)&field=typeNumber&search=2&sortField=year&sortType=1&sortField=votes.imdb&sortType=-1&token=\(token)") else {
+        fatalError("Missing URL")
       }
       
-      guard let response = response as? HTTPURLResponse else { return }
+      let moviesResource: Resource  = Resource<VideoResponse>(url: moviesURL, httpMethod: .get)
       
-      if response.statusCode == 200 {
-        
-        guard let data = data else { return }
-        
-        DispatchQueue.main.async {
-          
-          do {
-            let decodedSerials = try JSONDecoder().decode(VideoResponse.self, from: data)
-            
-            self.serials = decodedSerials.docs
-          } catch let error {
-            print("Error decoding: ", error)
-          }
-          
-        }
-      } else {
-        print("error")
-      }
-    }
-    
-    dataTask.resume()
-  }
+      let serialsResource: Resource = Resource<VideoResponse>(url: serialURL, httpMethod: .get)
+      
+      do {
 
-  
+        let moviesResponse: VideoResponse   = try await NetworkService.shared.request(resource: moviesResource)
+        
+        let serialsResponse: VideoResponse  = try await NetworkService.shared.request(resource: serialsResource)
+        
+        DispatchQueue.main.async {
+          self.movies   = moviesResponse.docs
+          self.serials  = serialsResponse.docs
+        }
+        
+      } catch {
+        throw AppError.custom(errorDescription: "Some Error")
+      }
+    }
+  }
 }
