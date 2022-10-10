@@ -1,11 +1,15 @@
 import SwiftUI
 
 struct MoviesScreen: View {
+  
   @StateObject var viewModel: MoviesViewModel = MoviesViewModel()
   
   var body: some View {
+    
     ScrollView {
+
       ForEach(viewModel.serials) { movie in
+        
         NavigationLink {
           SelectedMovieScreen(video: movie)
         } label: {
@@ -15,7 +19,7 @@ struct MoviesScreen: View {
             
             Spacer()
           }
-           .padding()
+          .padding()
         }
       }
     }
