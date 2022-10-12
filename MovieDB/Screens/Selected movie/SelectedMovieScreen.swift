@@ -11,15 +11,14 @@ struct SelectedMovieScreen: View {
   }
   
   var body: some View {
-    AsyncImage(url: imgUrl) { phase in
-      if let image = phase.image {
-        image
-      } else if phase.error != nil {
-        Image("stubImage")
-          .resizable()
-          .scaledToFit()
-          .frame(width: 190, height: 190)
-      }
+    AsyncImage(url: imgUrl) { image in
+      image.resizable()
+    } placeholder: {
+      Image("stubImage")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 190, height: 190)
     }
+    .frame(width: 190, height: 190)
   }
 }
